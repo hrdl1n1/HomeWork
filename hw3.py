@@ -87,26 +87,26 @@ from datetime import datetime, timedelta
 
 def get_upcoming_birthdays(users):
     today = datetime.today().date()
-    upcoming_birthdays = []
+    upcoming_bdays = []
 
     for user in users:
-        birthday = datetime.strptime(user["birthday"], "%Y.%m.%d").date()
+        bday = datetime.strptime(user["birthday"], "%Y.%m.%d").date()
 
         # Скільки днів до next birthday
-        days_until_birthday = (datetime(today.year, birthday.month, birthday.day).date() - today).days
+        days_until_bday = (datetime(today.year, bday.month, bday.day).date() - today).days
 
         # чи день народження випадає вперед на 7 днів - сьогодні включно
-        if 0 <= days_until_birthday <= 7:
+        if 0 <= days_until_bday <= 7:
             # Перенос привітання на наступний робочий день, якщо це потрібно
-            if days_until_birthday == 0 and today.weekday() in [5, 6]:  # Вихідний
-                days_until_birthday += 2 if today.weekday() == 5 else 1  # Перенос на понеділок
+            if days_until_bday == 0 and today.weekday() in [5, 6]:  # Вихідний
+                days_until_bday += 2 if today.weekday() == 5 else 1  # Перенос на понеділок
 
-            congratulation_date = today + timedelta(days=days_until_birthday)
+            congratulation_date = today + timedelta(days=days_until_bday)
             congratulation_date_str = congratulation_date.strftime("%Y.%m.%d")
 
-            upcoming_birthdays.append({"name": user["name"], "congratulation_date": congratulation_date_str})
+            upcoming_bdays.append({"name": user["name"], "congratulation_date": congratulation_date_str})
 
-    return upcoming_birthdays
+    return upcoming_bdays
 
 # Приклад використання коду
 users = [
@@ -114,5 +114,5 @@ users = [
     {"name": "Jane Smith", "birthday": "1990.01.26"}
 ]
 
-upcoming_birthdays = get_upcoming_birthdays(users)
-print("Список привітань на цьому тижні:", upcoming_birthdays)
+upcoming_bdays = get_upcoming_birthdays(users)
+print("Привітати на цьому тижні:", upcoming_bdays)

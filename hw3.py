@@ -4,13 +4,13 @@ from datetime import datetime
 
 def get_days_from_today(date):
     try:
-        # Перетворюємо рядок дати у форматі 'РРРР-ММ-ДД' у об'єкт datetime
+        # Перетворюємо дату у форматі 'РРРР-ММ-ДД' у datetime
         input_date = datetime.strptime(date, '%Y-%m-%d')
         
-        # Отримуємо поточну дату
+        # поточна дата
         current_date = datetime.today()
         
-        # Розраховуємо різницю між поточною датою та заданою датою у днях
+        # Різницю між поточною датою та заданою датою у днях
         days_difference = (current_date - input_date).days
         
         return days_difference
@@ -34,14 +34,14 @@ def get_numbers_ticket(min, max, quantity):
     if not (1 <= min <= max <= 1000) or not (1 <= quantity <= max - min + 1):
         return []
 
-    # Використання множини для забезпечення унікальності чисел
+    # Використання множини для унікальності чисел
     unique_numbers = set()
 
     while len(unique_numbers) < quantity:
-        # Додавання випадкового числа у заданому діапазоні
+        # Додавання випадкового числа
         unique_numbers.add(random.randint(min, max))
 
-    # Повернення відсортованого списку унікальних чисел
+    # Повернення відсортованого списку
     return sorted(list(unique_numbers))
 
 # Приклад використання коду
@@ -57,9 +57,9 @@ def normalize_phone(phone_number):
     # Видалення всіх символів, крім цифр та '+'
     cleaned_number = re.sub(r'[^0-9+]', '', phone_number)
 
-    # Перевірка, чи номер починається з '+'
+    # чи номер починається з '+' ?
     if not cleaned_number.startswith('+'):
-        # Додаємо міжнародний код для України '+38'
+        # Додаємо +38
         cleaned_number = '+38' + cleaned_number.lstrip('38')
 
     return cleaned_number
@@ -92,12 +92,12 @@ def get_upcoming_birthdays(users):
     for user in users:
         birthday = datetime.strptime(user["birthday"], "%Y.%m.%d").date()
 
-        # Визначення днів до наступного дня народження
+        # Скільки днів до next birthday
         days_until_birthday = (datetime(today.year, birthday.month, birthday.day).date() - today).days
 
-        # Перевірка, чи день народження випадає вперед на 7 днів включаючи поточний день
+        # чи день народження випадає вперед на 7 днів - сьогодні включно
         if 0 <= days_until_birthday <= 7:
-            # Перенос дати привітання на наступний робочий день, якщо потрібно
+            # Перенос привітання на наступний робочий день, якщо це потрібно
             if days_until_birthday == 0 and today.weekday() in [5, 6]:  # Вихідний
                 days_until_birthday += 2 if today.weekday() == 5 else 1  # Перенос на понеділок
 

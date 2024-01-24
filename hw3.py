@@ -18,7 +18,7 @@ def get_days_from_today(date):
         # Обробка винятку у разі неправильного формату вхідних даних
         return "Неправильний формат дати. Використовуйте 'РРРР-ММ-ДД'."
 
-# Приклад використання:
+# Приклад використання коду 
 date_string = '2020-10-09'
 result = get_days_from_today(date_string)
 
@@ -44,7 +44,7 @@ def get_numbers_ticket(min, max, quantity):
     # Повернення відсортованого списку унікальних чисел
     return sorted(list(unique_numbers))
 
-# Приклад використання
+# Приклад використання коду
 lottery_numbers = get_numbers_ticket(1, 49, 6)
 print("Ваші лотерейні числа:", lottery_numbers)
 
@@ -64,7 +64,7 @@ def normalize_phone(phone_number):
 
     return cleaned_number
 
-# Приклад використання
+# Приклад використання коду
 raw_numbers = [
     "067\\t123 4567",
     "(095) 234-5678\\n",

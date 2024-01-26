@@ -82,7 +82,6 @@ print("Нормалізовані номери телефонів для SMS-р�
 
 
 # Четверте завдання
-
 from datetime import datetime, timedelta
 
 def get_upcoming_birthdays(users):
@@ -90,10 +89,16 @@ def get_upcoming_birthdays(users):
     upcoming_bdays = []
 
     for user in users:
-        bday = datetime.strptime(user["birthday"], "%Y.%m.%d").date()
+        bday = datetime.strptime(user["birthday"], '%Y.%m.%d').date()
+        
+        bday_this_year = bday.replace(year=today.year)
+        
+        if bday_this_year < today:
+            bday = bday.replace(year=today.year + 1)
+        else:
+            bday = bday_this_year
 
-        # Скільки днів до next birthday
-        days_until_bday = (datetime(today.year, bday.month, bday.day).date() - today).days
+        days_until_bday = (bday - today).days
 
         # чи день народження випадає вперед на 7 днів - сьогодні включно
         if 0 <= days_until_bday <= 7:

@@ -97,21 +97,27 @@ def get_upcoming_birthdays(users):
 
         # чи день народження випадає вперед на 7 днів - сьогодні включно
         if 0 <= days_until_bday <= 7:
-            # Перенос привітання на наступний робочий день, якщо це потрібно
-            if days_until_bday == 0 and today.weekday() in [5, 6]:  # Вихідний
-                days_until_bday += 2 if today.weekday() == 5 else 1  # Перенос на понеділок
+            if bday.weekday() in [5, 6]:  # 5 - Субота, 6 - Неділя
+                days_until_monday = (7 - bday.weekday())
+                bday += timedelta(days=days_until_monday)
 
-            congratulation_date = today + timedelta(days=days_until_bday)
-            congratulation_date_str = congratulation_date.strftime("%Y.%m.%d")
-
-            upcoming_bdays.append({"name": user["name"], "congratulation_date": congratulation_date_str})
+            # Додавання інформації про користувача та дату привітання до списку
+            upcoming_bdays.append({
+                "name": user["name"],
+                "congratulation_date": bday.strftime("%Y.%m.%d")
+            })
 
     return upcoming_bdays
 
 # Приклад використання коду
 users = [
-    {"name": "John Doe", "birthday": "1985.01.23"},
-    {"name": "Jane Smith", "birthday": "1990.01.26"}
+    {"name": 'John Doe', "birthday": '1985.01.23'},
+    {"name": 'Jane Smith', "birthday": '1990.01.26'}, 
+    {"name": 'Nick Darsel', "birthday": '1984.01.27'}, 
+    {"name": 'Ethan Williams', "birthday": '1970.01.30'}, 
+    {"name": 'Liam Smith', "birthday": '1995.01.20'}, 
+    {"name": 'John Doe', "birthday": '1985.02.03'}, 
+    {"name": 'Jane Smith', "birthday": '1990.01.28'}
 ]
 
 upcoming_bdays = get_upcoming_birthdays(users)

@@ -102,7 +102,7 @@ def get_upcoming_birthdays(users):
 
         # чи день народження випадає вперед на 7 днів - сьогодні включно
         if 0 <= days_until_bday <= 7:
-            if bday.weekday() >= 5:  # 5 - Субота, 6 - Неділя
+            if bday.weekday() >= 5:  # 5 - Субота
                 days_until_monday = (7 - bday.weekday())
                 bday += timedelta(days_until_monday)
 
